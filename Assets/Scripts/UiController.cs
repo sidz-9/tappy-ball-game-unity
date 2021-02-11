@@ -35,7 +35,7 @@ public class UiController : MonoBehaviour
         startUi.SetActive(false);
     }
     public void GameOver() {
-        highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
         gameOverPanel.SetActive(true);
     }
 

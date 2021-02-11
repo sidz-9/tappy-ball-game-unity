@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PipeSpawnner : MonoBehaviour
 {
+    public static PipeSpawnner instance;
+
+    void Awake() {
+        if(instance == null) {
+            instance = this;
+        }
+    }
+
     public float maxYpos;
     public float spawnTime;
     public GameObject pipes;
@@ -12,13 +20,15 @@ public class PipeSpawnner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartSpawnningPipes();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameController.instance.gameOver == true) {
+            StopSpawnningPipes();
+        }
     }
 
     public void StartSpawnningPipes() {
