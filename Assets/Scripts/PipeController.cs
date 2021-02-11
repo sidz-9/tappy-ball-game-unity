@@ -30,4 +30,10 @@ public class PipeController : MonoBehaviour
     void Move() {
         rb.velocity = new Vector2(-speed, upDownSpeed);
     }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if(col.gameObject.tag == "PipeDespawnner") {
+            Destroy(gameObject);
+        }
+    } 
 }

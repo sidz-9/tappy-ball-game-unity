@@ -7,6 +7,7 @@ public class BallController : MonoBehaviour
     Rigidbody2D rb;
     public float upForce;
     bool started;
+    bool gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,7 @@ public class BallController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;      // isKinematic - no physics forces are applied on the object
         started = false;
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -30,6 +32,16 @@ public class BallController : MonoBehaviour
                 rb.velocity = Vector2.zero;     // setting the velocity to zero, else the ball will fall down directly, without the player getting any chance to react
                 rb.AddForce(new Vector2(0, upForce));
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if(col.gameObject.tag == "Pipe") {
+            gameOver = true;
+        }
+
+        if(col.gameObject.tag == "ScoreChecker" && !gameOver) {
+            ScoreController.instance.IncrementScore();
         }
     }
 }
